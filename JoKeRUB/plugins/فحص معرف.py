@@ -3,8 +3,12 @@ from JoKeRUB.core.logger import logging
 import re
 import requests
 from telethon.sync import TelegramClient, events
+plugin_category = "البوت"
 
-@l313l.zed_cmd.on(events.NewMessage(pattern='nft'))
+# تهيئة Instaloader
+loader = Instaloader()
+
+@l313l.on(events.NewMessage(pattern='.انستا (.*)'))
 async def checknft(event):
     try:
         chat_id = event.chat_id

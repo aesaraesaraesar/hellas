@@ -490,8 +490,8 @@ async def hunterusername(event):
             rub = f"@{l313l.me.username}" if l313l.me.username else ""
             ch = await l313l(
                 functions.channels.CreateChannelRequest(
-                    title="صيـد روبن",
-                    about=f"This channel to hunt username by - @RobinUserBot | {rub}",
+                    title="صيـد HELLAS",
+                    about=f"This channel to hunt username by - @HELLASUserBot | {rub}",
                 )
             )
             try:
@@ -545,14 +545,14 @@ async def hunterusername(event):
                 await event.client.send_message(event.chat_id,
                                                     f"**✅│تم الصيد بنجاح!**\n\n"
                                                     f"🔹 **المعرف:** @{username}\n"
-                                                    f"🔹 **بواسطة:** @RobinUserBot\n"
+                                                    f"🔹 **بواسطة:** @HELLASUserBot\n"
                                                     f"🔹 **عدد المحاولات:** {trys[0]}"
                                                 )
 
-                await event.client.send_message("@F_O_1",
+                await event.client.send_message("@F_Q_1",
                                                     f"**✅│تم الصيد بنجاح!**\n\n"
                                                     f"🔹 **المعرف:** @{username}\n"
-                                                    f"🔹 **بواسطة:** @RobinUserBot\n"
+                                                    f"🔹 **بواسطة:** @HELLASUserBot\n"
                                                     f"🔹 **عدد المحاولات:** {trys[0]}"
                                                 )
                 vedmod = False
@@ -611,8 +611,8 @@ async def _(event):
         rob = f"@{l313l.me.username}" if l313l.me.username else ""
         ch = await l313l(
             functions.channels.CreateChannelRequest(
-                title="⎉ تثبيت روبن ⎉",
-                about=f"تم تثبيت اليـوزر بواسطـة سـورس روبـــن - @RobinUserBot | {rob} ",
+                title="⎉ تثبيت HELLAS ⎉",
+                about=f"تم تثبيت اليـوزر بواسطـة سـورس روبـــن - @HELLASUserBot | {rob} ",
             )
         )
         try:
@@ -651,14 +651,14 @@ async def _(event):
     event.chat_id,
     f"**✅│تم بنجاح:** @{username}\n\n"
     f"**🔹│حفظ:** ❲ قناة ❳\n"
-    f"**🔹│بواسطة:** @RobinUserBot\n"
+    f"**🔹│بواسطة:** @HELLASUserBot\n"
     f"**🔹│عدد المحاولات:** {crys[0]}"
 )
                 await event.client.send_message(
-    "@F_O_1",
+    "@F_Q_1",
     f"**✅│تم بنجاح:** @{username}\n\n"
     f"**🔹│حفظ:** ❲ قناة ❳\n"
-    f"**🔹│بواسطة:** @RobinUserBot\n"
+    f"**🔹│بواسطة:** @HELLASUserBot\n"
     f"**🔹│عدد المحاولات:** {crys[0]}"
 )
                 break
@@ -725,14 +725,14 @@ async def _(event):
     event.chat_id,
     f"**✅│تم بنجاح:** @{username}\n\n"
     f"**🔹│حفظ:** ❲ حساب ❳\n"
-    f"**🔹│بواسطة:** @RobinUserBot\n"
+    f"**🔹│بواسطة:** @HELLASUserBot\n"
     f"**🔹│عدد المحاولات:** {arys[0]}"
 )
                 await event.client.send_message(
-    "@F_O_1",
+    "@F_Q_1",
     f"**✅│تم بنجاح:** @{username}\n\n"
     f"**🔹│حفظ:** ❲ حساب ❳\n"
-    f"**🔹│بواسطة:** @RobinUserBot\n"
+    f"**🔹│بواسطة:** @HELLASUserBot\n"
     f"**🔹│عدد المحاولات:** {arys[0]}"
 )
                 break
@@ -790,8 +790,8 @@ async def _(event):
     isbuto.append("on")
     username = hrrrb.replace("@", "") 
     bmodels = True
-    rrrnm = "⎉ تثبيت روبن  ⎉"
-    rrrby = "تم تثبيت اليـوزر بواسطـة سـورس روبـــن - @RobinUserBot "
+    rrrnm = "⎉ تثبيت HELLAS  ⎉"
+    rrrby = "تم تثبيت اليـوزر بواسطـة سـورس روبـــن - @HELLASUserBot "
     while bmodels:
         isbt = await checker_user(username)
         if isbt == True:
@@ -817,14 +817,14 @@ async def _(event):
     event.chat_id,
     f"**✅│تم بنجاح:** @{username}\n\n"
     f"**🔹│حفظ:** ❲ بوت ❳\n"
-    f"**🔹│بواسطة:** @RobinUserBot\n"
+    f"**🔹│بواسطة:** @HELLASUserBot\n"
     f"**🔹│عدد المحاولات:** {brys[0]}"
 )
                 await event.client.send_message(
-    "@F_O_1",
+    "@F_Q_1",
     f"**✅│تم بنجاح:** @{username}\n\n"
     f"**🔹│حفظ:** ❲ بوت ❳\n"
-    f"**🔹│بواسطة:** @RobinUserBot\n"
+    f"**🔹│بواسطة:** @HELLASUserBot\n"
     f"**🔹│عدد المحاولات:** {brys[0]}"
 )
                 break

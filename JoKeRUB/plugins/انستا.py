@@ -1,7 +1,7 @@
 import os
 from telethon import events
 from instaloader import Instaloader, Post
-from Tepthon import zedub
+from JoKeRUB import l313l
 from ..Config import Config
 
 plugin_category = "البوت"
@@ -9,7 +9,7 @@ plugin_category = "البوت"
 # تهيئة Instaloader
 loader = Instaloader()
 
-@zedub.on(events.NewMessage(pattern='.انستا (.*)'))
+@l313l.on(events.NewMessage(pattern='.انستا (.*)'))
 async def download_instagram_video(event):
     # تحقق مما إذا كان المرسل هو الحساب المنصب فقط
     if event.sender_id != Config.OWNER_ID:  # استبدل Config.OWNER_ID بمعرف صاحب الحساب
@@ -32,7 +32,7 @@ async def download_instagram_video(event):
             await event.reply(f"تم تحميل الفيديو بنجاح: {post.title}\n⇜ جاري إرسال الملف...")
 
             # إرسال الملف إلى تيليجرام
-            await zedub.send_file(event.chat_id, filename)
+            await l313l.send_file(event.chat_id, filename)
 
             # حذف الملف بعد الإرسال
             os.remove(filename)

@@ -28,7 +28,7 @@ async def _(event):
 async def _(event):
      if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
             await event.edit(
-                "˛ JoKeRUB ، ٰFٓoٍَِNٌtSَ\n"
+                "˛ HELLAS ، ٰFٓoٍَِNٌtSَ\n"
                 "•━═━═━═━═━━═━═━═━═━•\n"
                 "**قائـمة اوامر الزغرفة :**\n"
                 " `.زغرفة0`\n"

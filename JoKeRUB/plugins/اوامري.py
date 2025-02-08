@@ -9,8 +9,8 @@ from JoKeRUB import l313l
 from ..core import check_owner
 from ..Config import Config
 
-JEP_IC = "https://telegra.ph/file/762989c65df81fc2e96d7.jpg"
-ROE = "**♰ هـذه هي قائمة اوامـر سـورس الجوكر ♰**"
+JEP_IC = ""
+ROE = "**♰ هـذه هي قائمة اوامـر سـورس Robin  ♰**"
 
 if Config.TG_BOT_USERNAME is not None and tgbot is not None:
 
@@ -79,10 +79,10 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
 async def repo(event):
     if event.fwd_from:
         return
-    lMl10l = Config.TG_BOT_USERNAME
+    F_O_1 = Config.TG_BOT_USERNAME
     if event.reply_to_msg_id:
         await event.get_reply_message()
-    response = await bot.inline_query(lMl10l, "اوامري")
+    response = await bot.inline_query(F_O_1, "اوامري")
     await response[0].click(event.chat_id)
     await event.delete()
 

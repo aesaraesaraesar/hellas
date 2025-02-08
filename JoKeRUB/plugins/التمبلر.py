@@ -12,16 +12,16 @@ from l313l.razan.resources.strings import *
 
 plugin_category = "extra" 
 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="م17$",
     command=("م17", plugin_category),)
 async def _(event):
      if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
             await event.edit(
-                "قائمة اوامر التمبـلر :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اختر احدى هذه القوائم\n\n- ( `.الزغرفة` ) \n- ( `.اسماء تمبلر` )   \n- (`.اسماء عربية`)\n- ( `.اشهر مزغرفة`) \n- ( `.الاختصارات` ) \n- ( `.البايو` )\n- (`.المتحركات`)\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @jepthon"
+                "قائمة اوامر التمبـلر :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اختر احدى هذه القوائم\n\n- ( `.الزغرفة` ) \n- ( `.اسماء تمبلر` )   \n- (`.اسماء عربية`)\n- ( `.اشهر مزغرفة`) \n- ( `.الاختصارات` ) \n- ( `.البايو` )\n- (`.المتحركات`)\n\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @HELLASUserBot"
             )
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="الزغرفة$",
     command=("الزغرفة", plugin_category),)
@@ -43,16 +43,16 @@ async def _(event):
                 " `.زغرفة9`\n"
                 " **اكتب الاسم مع الامر للـزغرفة فقط انكليزي**\n"
                 "•━═━═━═━═━━═━═━═━═━•‌‌\n"
-                "˛ JoKeRUB ، ٰUٍsٓEِrBُoََt - [CَِٓHُ](t.me/jepthon)"
+                "˛ HELLAS ، ٰUٍsٓEِrBُoََt - [CَِٓHُ](t.me/HELLASUserBot)"
             )
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="اسماء تمبلر$",
     command=("اسماء تمبلر", plugin_category),)
 async def _(event):
      if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
             await event.edit(
-                "قائمة اوامـر اسمـاء تمبـلر :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اخـتر احـد هـذه القـوائـم:\n\n- (`.شباب1`) \n- (`.شباب2`) \n- (`.بنات1`) \n- (`.بنات2`) \n- (`.قنوات`) \n\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @jepthon"
+                "قائمة اوامـر اسمـاء تمبـلر :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اخـتر احـد هـذه القـوائـم:\n\n- (`.شباب1`) \n- (`.شباب2`) \n- (`.بنات1`) \n- (`.بنات2`) \n- (`.قنوات`) \n\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @HELLASUserBot"
             )
 #by ~ @RR 9R7
 @l313l.ar_cmd(
@@ -61,7 +61,7 @@ async def _(event):
 async def _(event):
      if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
             await event.edit(
-                "قائمة اوامـر البـايو او الـنبذة :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اخـتر احـد هـذه القـوائـم:\n\n \n- (`.بايو عربي`) \n- (`.بايو اجنبي`) \n ➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @jepthon"
+                "قائمة اوامـر البـايو او الـنبذة :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اخـتر احـد هـذه القـوائـم:\n\n \n- (`.بايو عربي`) \n- (`.بايو اجنبي`) \n ➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @HELLASUserBot"
             )
             
 @l313l.ar_cmd(
@@ -70,7 +70,7 @@ async def _(event):
 async def _(event):
      if not event.text[0].isalpha() and event.text[0] not in ("/", "#", "@", "!"):
             await event.edit(
-                "قائمة اوامـر الاخـتصارات :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اخـتر احـد هـذه القـوائـم:\n\n \n- (`.اختصارات1`) \n- (`.اختصارات2`) \n- (`.اختصارات3`) \n- (`.اختصارات4`) \n- (`.اختصارات5`) \n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @jepthon"
+                "قائمة اوامـر الاخـتصارات :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اخـتر احـد هـذه القـوائـم:\n\n \n- (`.اختصارات1`) \n- (`.اختصارات2`) \n- (`.اختصارات3`) \n- (`.اختصارات4`) \n- (`.اختصارات5`) \n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @HELLASUserBot"
             )
             
 @l313l.ar_cmd(
@@ -97,14 +97,14 @@ async def _(event):
     pattern="المتحركات$",
     command=("المتحركات", plugin_category),)
 async def _(event):
-    await event.edit("قائمة اوامر المتـحركات :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اختر احدى هذه القوائم\n\n- ( `.متحركات كيوت` ) \n- ( `.متحركات ساد` )\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @jepthon"
+    await event.edit("قائمة اوامر المتـحركات :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اختر احدى هذه القوائم\n\n- ( `.متحركات كيوت` ) \n- ( `.متحركات ساد` )\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @HELLASUserBot"
             )
             
 @l313l.ar_cmd(
     pattern="متحركات ساد$",
     command=("متحركات ساد", plugin_category),)
 async def _(event):
-    await event.edit("قائمة اوامر متحـرات سـاد :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اختر احدى هذه القوائم\n\n- ( `.س1` ) \n- ( `.س2` )   \n- (`.س3`)\n- ( `.س4`) \n- ( `.س5` ) \n- ( `.س6` )\n- ( `.س7` )\n- ( `.س8` )\n- ( `.س9` )\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @jepthon"
+    await event.edit("قائمة اوامر متحـرات سـاد :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اختر احدى هذه القوائم\n\n- ( `.س1` ) \n- ( `.س2` )   \n- (`.س3`)\n- ( `.س4`) \n- ( `.س5` ) \n- ( `.س6` )\n- ( `.س7` )\n- ( `.س8` )\n- ( `.س9` )\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @HELLASUserBot"
             )
             
 
@@ -112,11 +112,11 @@ async def _(event):
     pattern="متحركات كيوت$",
     command=("متحركات كيوت", plugin_category),)
 async def _(event):
-    await event.edit("قائمة اوامر متحـرات كيـوت :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اختر احدى هذه القوائم\n\n- ( `.ك1` ) \n- ( `.ك2` )   \n- (`.ك3`)\n- ( `.ك4`) \n- ( `.ك5` ) \n- ( `.ك6` )\n- ( `.ك7` )\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @jepthon"
+    await event.edit("قائمة اوامر متحـرات كيـوت :\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n ᯽︙ اختر احدى هذه القوائم\n\n- ( `.ك1` ) \n- ( `.ك2` )   \n- (`.ك3`)\n- ( `.ك4`) \n- ( `.ك5` ) \n- ( `.ك6` )\n- ( `.ك7` )\n➖➖➖➖➖➖➖➖➖➖➖➖➖\n⌔︙CH : @HELLASUserBot"
             )           
 
         
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="اشهر مزغرفة$",
     command=("اشهر مزغرفة", plugin_category),)
@@ -201,7 +201,7 @@ async def _(event):
                 "- فَطـﯡشہ𓆤."
             )
 # ˛ JoKeRUB ، ٰUٍsٓEِrBُoََt  # 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="شباب1$",
     command=("شباب1", plugin_category),)
@@ -245,7 +245,7 @@ async def _(event):
                 "「𝘑𝘮𝘳𝘢 𐃣."
             )
 # ˛ JoKeRUB ، ٰUٍsٓEِrBُoََt  # 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="شباب2$",
     command=("شباب2", plugin_category),
@@ -297,7 +297,7 @@ async def _(event):
                 "𓂐 𝙅𝙊𝙅 𖠛 ."
             )
 # ˛ JoKeRUB ، ٰUٍsٓEِrBُoََt  # 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="بنات1$",
     command=("بنات1", plugin_category),)
@@ -355,7 +355,7 @@ async def _(event):
                 "𓂐 𝘼𝙈𝙔  𖠛 ."
             )
 # ˛ 𝖩𝗆𝗍𝖧ٰ𝗈𝗇 ، ٰUٍsٓEِrBُoََt  # 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="بنات2$",
     command=("بنات2", plugin_category),
@@ -399,7 +399,7 @@ async def _(event):
             )
         
 # ˛ JoKeRUB ، ٰUٍsٓEِrBُoََt  # 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="قنوات$",
     command=("قنوات", plugin_category),
@@ -452,7 +452,7 @@ async def _(event):
                 ": ..................."
             )
 # ˛ JoKeRUB ، ٰUٍsٓEِrBُoََt  # 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="اختصارات1$",
     command=("اختصارات1", plugin_category),
@@ -548,7 +548,7 @@ async def _(event):
                 "أﯠﯠ؏\n"
             )
 # ˛ JoKeRUB ، ٰUٍsٓEِrBُoََt  # 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="اختصارات2$",
     command=("اختصارات2", plugin_category),
@@ -588,7 +588,7 @@ async def _(event):
             )
         
 # ˛ JoKeRUB ، ٰUٍsٓEِrBُoََt  # 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="اختصارات3$",
     command=("اختصارات3", plugin_category),
@@ -639,7 +639,7 @@ async def _(event):
             )
         
 # ˛ JoKeRUB ، ٰUٍsٓEِrBُoََt  # 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="اختصارات4$",
     command=("اختصارات4", plugin_category),)
@@ -687,7 +687,7 @@ async def _(event):
             )
         
 # ˛ JoKeRUB ، ٰUٍsٓEِrBُoََt  # 
-#by ~ @lMl10l
+#by ~ @F_O_1
 @l313l.ar_cmd(
     pattern="اختصارات5$",
     command=("اختصارات5", plugin_category),)
@@ -762,5 +762,4 @@ async def _(event):
                 "- حِݪۅ 💕.\n"
                 "- مٖتݪزِكٰ 💕."
             )
-#by ~ @lMl10l
-
+#by ~ @F_O_1

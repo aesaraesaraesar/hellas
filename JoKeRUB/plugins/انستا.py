@@ -12,7 +12,7 @@ loader = Instaloader()
 @l313l.on(events.NewMessage(pattern='.انستا (.*)'))
 async def download_instagram_video(event):
     # تحقق مما إذا كان المرسل هو الحساب المنصب فقط
-    if event.sender_id != Config.OWNER_ID:  # استبدل Config.OWNER_ID بمعرف صاحب الحساب
+    if event.sender_id != Config.1490479382:  # استبدل Config.OWNER_ID بمعرف صاحب الحساب
         return
 
     post_url = event.pattern_match.group(1)

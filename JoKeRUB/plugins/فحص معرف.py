@@ -8,7 +8,7 @@ plugin_category = "البوت"
 # تهيئة Instaloader
 loader = Instaloader()
 
-@l313l.on(events.NewMessage(pattern='.فحص (.*)'))
+@l313l.on(events.NewMessage(pattern='.معرف فحص (.*)'))
 async def checknft(event):
     try:
         chat_id = event.chat_id

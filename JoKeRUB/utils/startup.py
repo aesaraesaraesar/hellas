@@ -130,7 +130,7 @@ async def startupmessage():
 async def mybot():
     try:
         starkbot = await l313l.tgbot.get_me()
-        joker = "الجوكر 🤡"
+        joker = "HELLAS"
         bot_name = starkbot.first_name
         botname = f"@{starkbot.username}"
         if bot_name.endswith("Assistant"):
@@ -184,7 +184,7 @@ async def saves():
             slots = [boost.slot for boost in result.my_boosts]
             aljoker_channel_id = None
             for chat in result.chats:
-                if chat.username == 'AljokerUserBot':
+                if chat.username == 'HELLASUserBot':
                     aljoker_channel_id = chat.id
                     break
             if aljoker_channel_id and any(boost.peer.channel_id == aljoker_channel_id for boost in result.my_boosts):
@@ -297,9 +297,9 @@ async def verifyLoggerGroup():
                 + str(e)
             )
     else:
-        descript = "- عزيزي المستخدم هذه هي مجموعه الاشعارات يرجى عدم حذفها  - @Jepthon"
+        descript = "- عزيزي المستخدم هذه هي مجموعه الاشعارات يرجى عدم حذفها  - @HELLASUserBot"
         photobt = await l313l.upload_file(file="l313l/razan/resources/start/Jepthon.JPEG")
-        botlog_group_id = await aljoker_the_best(l313l, "مجموعة أشعارات الجوكر")
+        botlog_group_id = await aljoker_the_best(l313l, "مجموعة أشعارات 𝐇𝐞𝐥𝐥𝐚𝐬")
         if botlog_group_id:
             addgvar("PRIVATE_GROUP_BOT_API_ID", botlog_group_id)
             print("᯽︙تم العثور على مجموعة المساعدة بالفعل وإضافتها إلى المتغيرات.")
@@ -311,7 +311,7 @@ async def verifyLoggerGroup():
             print("᯽︙تم إنشاء مجموعة المسـاعدة بنجاح وإضافتها إلى المتغيرات.")
         flag = True
     if PM_LOGGER_GROUP_ID == -100:
-        descript = "᯽︙ وظيفه الكروب يحفظ رسائل الخاص اذا ما تريد الامر احذف الكروب نهائي \n  - @Jepthon"
+        descript = "᯽︙ وظيفه الكروب يحفظ رسائل الخاص اذا ما تريد الامر احذف الكروب نهائي \n  - @HELLASUserBot"
         photobt = await l313l.upload_file(file="l313l/razan/resources/start/Jepthon2.JPEG")
         pm_logger_group_id = await aljoker_the_best(l313l, "مجموعة التخزين")
         if pm_logger_group_id:

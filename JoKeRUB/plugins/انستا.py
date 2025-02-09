@@ -1,42 +1,67 @@
+#𝙕𝙚𝙙𝙏𝙝𝙤𝙣 ®
+# Port to ZThon
+# modified by @ZedThon
+# Copyright (C) 2022.
+
+import asyncio
 import os
+
 from telethon import events
-from instaloader import Instaloader, Post
+from telethon.errors.rpcerrorlist import YouBlockedUserError
+
 from JoKeRUB import l313l
-from ..Config import Config
 
-plugin_category = "البوت"
+from ..core.managers import edit_delete, edit_or_reply
+from ..helpers.utils import reply_id
+from . import BOTLOG, BOTLOG_CHATID
 
-# تهيئة Instaloader
-loader = Instaloader()
+plugin_category = "البحث"
 
-@l313l.on(events.NewMessage(pattern='.انستا (.*)'))
-async def download_instagram_video(event):
-    # تحقق مما إذا كان المرسل هو الحساب المنصب فقط
-    if event.sender_id != Config.1490479382:  # استبدل Config.OWNER_ID بمعرف صاحب الحساب
+
+@l313l.ar_cmd(
+    pattern="انستكرام(?:\s|$)([\s\S]*)",
+    command=("انستكرام", plugin_category),
+    info={
+        "header": "لـ تحميل الفيـديـو من تيـك تـوك عبـر الرابـط",
+        "الاستـخـدام": "{tr}انستكرام بالـرد ع رابـط",
+    },
+)
+async def _(event):
+    if event.fwd_from:
         return
-
-    post_url = event.pattern_match.group(1)
-    await event.reply(f"جاري تحميل الفيديو من الرابط: {post_url}...")
-
-    try:
-        # استخراج جزء shortcode من الرابط
-        shortcode = post_url.split("/")[-2]
-        post = Post.from_shortcode(loader.context, shortcode)
-
-        if post.is_video:  # تحقق من كون المنشور فيديو
-            filename = f"{shortcode}.mp4"  # اسم الملف الذي سيتم حفظه
-
-            # تحميل الفيديو
-            loader.download_post(post, target=filename)
-
-            await event.reply(f"تم تحميل الفيديو بنجاح: {post.title}\n⇜ جاري إرسال الملف...")
-
-            # إرسال الملف إلى تيليجرام
-            await l313l.send_file(event.chat_id, filename)
-
-            # حذف الملف بعد الإرسال
-            os.remove(filename)
+    reply_message = await event.get_reply_message()
+    if not reply_message:
+        await edit_or_reply(event, "**```بالـرد على الرابـط حمبـي 🧸🎈```**")
+        return
+    if not reply_message.text:
+        await edit_or_reply(event, "**```بالـرد على الرابـط حمبـي 🧸🎈```**")
+        return
+    chat = "@Bshahjahavvavbot"
+    zzzzl1l = await edit_or_reply(event, "**╮ ❐ جـارِ التحميـل من الانستكرام انتظر 2ثانيه وخذ الفديومن البوت : @Bshahjahavvavbot   ▬▭... 𓅫╰**")
+    async with event.client.conversation(chat) as conv:
+        try:
+            response = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=6748718626)
+            )
+            await event.client.forward_messages(chat, reply_message)
+            response = await response
+            await event.client.send_read_acknowledge(conv.chat_id)
+        except YouBlockedUserError:
+            await zzzzl1l.edit(
+                "**❈╎تحـقق من انـك لم تقـم بحظـر البوت @Bshahjahavvavbot .. ثم اعـد استخدام الامـر ...🤖♥️**"
+            )
+            return
+        if response.text.startswith(""):
+            await zzzzl1l.edit("**🤨💔...؟**")
         else:
-            await event.reply("❌ هذا المنشور ليس فيديو.")
-    except Exception as e:
-        await event.reply(f"خطأ ❌: {e}")
+            await zzzzl1l.delete()
+            await event.client.send_message(event.chat_id, response.message)
+
+
+CMD_HELP.update(
+    {
+        " انستكرام": "**اسم الاضافـه : **`انستكرام `\
+    \n\n**╮•❐ الامـر ⦂ **`.انستكرام` بالرد على الرابط\
+    \n**الشـرح •• **تحميل مقاطـع الفيديـو من  انستكرام"
+    }
+)

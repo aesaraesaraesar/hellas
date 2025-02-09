@@ -95,8 +95,8 @@ async def startupmessage():
             Config.CATUBLOGO = await l313l.tgbot.send_file(
                 BOTLOG_CHATID,
                 "https://t.me/MemeSoundJep/24",
-                caption="**‏᯽︙ بــوت 7rB  يـعـمـل بـنـجـاح ✓ \n᯽︙ أرسل `.الاوامر`لرؤية اوامر السورس \n  ᯽︙ لأستعمال بوت الأختراق عبر كود التيرمكس أرسل`.هاك`**",
-                buttons=[(Button.url("سورس 7rB ", "https://t.me/k_jj_j"),)],
+                caption="**‏᯽︙ بــوت robin  يـعـمـل بـنـجـاح ✓ \n᯽︙ أرسل `.الاوامر`لرؤية اوامر السورس \n  ᯽︙ لأستعمال بوت الأختراق عبر كود التيرمكس أرسل`.هاك`**",
+                buttons=[(Button.url("سورس روبن", "https://t.me/HELLASUserBot"),)],
             )
     except Exception as e:
         LOGS.error(e)
@@ -130,13 +130,13 @@ async def startupmessage():
 async def mybot():
     try:
         starkbot = await l313l.tgbot.get_me()
-        joker = "HELLAS"
+        joker = "البوت المساعد"
         bot_name = starkbot.first_name
         botname = f"@{starkbot.username}"
         if bot_name.endswith("Assistant"):
             print("تم تشغيل البوت")
         if starkbot.bot_inline_placeholder:
-            print("HELLAS  ForEver")
+            print("hrb  ForEver")
         else:
             try:
                 await l313l.send_message("@BotFather", "/setinline")
@@ -174,27 +174,12 @@ async def add_bot_to_logger_group(chat_id):
             )
         except Exception as e:
             LOGS.error(str(e))
-#by @k_jj_j بس اشوفك خامطه للكود اهينك وافضحك
-JoKeRUB = {"@uui7rb", "@k_jj_j", "@E_4_R"}
+#by @F_O_1 بس اشوفك خامطه للكود اهينك وافضحك
+JoKeRUB = {"@hellashelb", "@HELLASUserBot", "@E_4_R"}
 async def saves():
     for F_O_1 in JoKeRUB:
         try:
             await l313l(JoinChannelRequest(channel=F_O_1))
-            result = await l313l(functions.premium.GetMyBoostsRequest())
-            slots = [boost.slot for boost in result.my_boosts]
-            hrb_channel_id = None
-            for chat in result.chats:
-                if chat.username == 'AljokerUserBot':
-                    hrb_channel_id = chat.id
-                    break
-            if hrb_channel_id and any(boost.peer.channel_id == hrb_channel_id for boost in result.my_boosts):
-                continue
-            if not slots:
-                return
-            await l313l(functions.premium.ApplyBoostRequest(
-                'AljokerUserBot',
-                slots=slots
-            ))
         except FloodWaitError as e:
             continue
         except OverflowError:
@@ -297,15 +282,15 @@ async def verifyLoggerGroup():
                 + str(e)
             )
     else:
-        descript = "- عزيزي المستخدم هذه هي مجموعه الاشعارات يرجى عدم حذفها  - @HELLASUserBot"
+        descript = "- عزيزي المستخدم هذه هي مجموعه الاشعارات يرجى عدم حذفها  - @k_jj_j"
         photobt = await l313l.upload_file(file="l313l/razan/resources/start/k_jj_j.JPEG")
-        botlog_group_id = await hrb_the_best(l313l, "مجموعة أشعارات HELLAS ")
+        botlog_group_id = await hrb_the_best(l313l, "مجموعة أشعارات 𝐇𝐞𝐥𝐥𝐚𝐬 ")
         if botlog_group_id:
             addgvar("PRIVATE_GROUP_BOT_API_ID", botlog_group_id)
             print("᯽︙تم العثور على مجموعة المساعدة بالفعل وإضافتها إلى المتغيرات.")
         else:
             _, groupid = await create_supergroup(
-                "مجموعة أشعارات HELLAS ", l313l, Config.TG_BOT_USERNAME, descript, photobt
+                "مجموعة أشعارات 𝐇𝐞𝐥𝐥𝐚𝐬 ", l313l, Config.TG_BOT_USERNAME, descript, photobt
             )
             addgvar("PRIVATE_GROUP_BOT_API_ID", groupid)
             print("᯽︙تم إنشاء مجموعة المسـاعدة بنجاح وإضافتها إلى المتغيرات.")

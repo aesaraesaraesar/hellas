@@ -53,7 +53,7 @@ def ibuild_keyboard(buttons):
 
 
 def main_menu():
-    text = f"**- [سـورس HELLAS ](https://t.me/n_nnae)\
+    text = f"**- [سـورس HELLAS ](https://t.me/HELLASUserBot)\
         \n المسـاعد\
         \n\
         \n◽ HELLAS  لـ {mention}**"
@@ -228,7 +228,7 @@ async def inline_handler(event):  # sourcery no-metrics
             buttons = [
                 (
                     Button.inline("الحـالة ⚒️", data="stats"),
-                    Button.url(" JoKeRUB UsᴇʀBoᴛ", "https://t.me/n_nnae"),
+                    Button.url(" JoKeRUB UsᴇʀBoᴛ", "https://t.me/HELLASUserBot"),
                 )
             ]
             ALIVE_PIC = gvarstatus("ALIVE_PIC")
@@ -559,10 +559,10 @@ async def inline_handler(event):  # sourcery no-metrics
     else:
         buttons = [
             (
-                Button.url("قنـاة السـورس ⚒️", "https://t.me/n_nnae"),
+                Button.url("قنـاة السـورس ⚒️", "https://t.me/HELLASUserBot"),
                 Button.url(
                     "كـروب المـساعدة 📬",
-                    "https://t.me/n_nnae1",
+                    "https://t.me/helashelb",
                 ),
             )
         ]
@@ -571,12 +571,12 @@ async def inline_handler(event):  # sourcery no-metrics
             url=ROZLOGO, size=0, mime_type="image/jpeg", attributes=[]
         )
         text, msg_entities = await event.client._parse_message_text(
-            "**[بـوت HELLAS  🧸♥](https://t.me/n_nnae)**\
+            "**[بـوت HELLAS  🧸♥](https://t.me/HELLASUserBot)**\
             \n\
             \n❤ HELLAS  هـو بـوت بسـيط يدخـل الـى حسـابك لجعـلك تتحـكم به معـ اوامـر معينـة.\
             \n\
             \n**اذا كـنت تـرغب بتـنصيـب السـورس عـلى حسـابك ,\
-            \n🐾 تعال الـى [كروب المسـاعدة](https://t.me/n_nnae1)!**",
+            \n🐾 تعال الـى [كروب المسـاعدة](https://t.me/helashelb)!**",
             "md",
         )
         result = types.InputBotInlineResult(
@@ -584,7 +584,7 @@ async def inline_handler(event):  # sourcery no-metrics
             type="photo",
             title="l313l 🧸♥",
             description="ادخـل كـروب المسـاعدة",
-            url="https://t.me/n_nnae1",
+            url="https://t.me/helashelb",
             thumb=photo,
             content=photo,
             send_message=types.InputBotInlineMessageMediaAuto(

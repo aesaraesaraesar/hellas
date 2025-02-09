@@ -37,7 +37,7 @@ async def _(event):
         await edit_or_reply(event, "**```بالـرد على الرابـط حمبـي 🧸🎈```**")
         return
     chat = "@Bshahjahavvavbot"
-    zzzzl1l = await edit_or_reply(event, "**╮ ❐ جـارِ التحميـل من تيـك تـوك انتظـر قليلاً  ▬▭... 𓅫╰**")
+    zzzzl1l = await edit_or_reply(event, "**╮ ❐ جـارِ التحميـل من تيـك تـوك انتظر 2ثانيه وخذ الفديومن البوت: @Bshahjahavvavbot ▬▭... 𓅫╰**")
     async with event.client.conversation(chat) as conv:
         try:
             response = conv.wait_event(

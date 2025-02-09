@@ -18,7 +18,7 @@ from . import BOTLOG, BOTLOG_CHATID
 plugin_category = "البحث"
 
 
-@l313l_cmd(
+@l313l.ar_cmd(
     pattern="تيكتوك(?:\s|$)([\s\S]*)",
     command=("تيكتوك", plugin_category),
     info={

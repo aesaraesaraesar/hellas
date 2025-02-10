@@ -38,9 +38,9 @@ print(f'{F}▭▬▭'*20)
 while True:
     try:
         # الانتظار لإدخال الأمر من المستخدم
-        command = input(f"{Z}[{Z}?{Z}]{Z} أدخل الأمر (مثال: .صيد تيكنوك): ")
+        command = input(f"{Z}[{Z}?{Z}]{Z} أدخل الأمر (مثال: .رباعي تيكتوك أو .إيقاف الصيد): ")
 
-        if command == ".صيد تيكنوك":
+        if command == ".رباعي تيكتوك":
             # توليد أسماء مستخدمين عشوائية (الرباعية)
             y = ''.join(random.choice('qwertyuiopasdfghjklzxcvbnm') for _ in range(1))
             j = ''.join(random.choice('qwertyuiopasdfghjklzxcvbnm') for _ in range(1))
@@ -85,8 +85,12 @@ while True:
 {X}---------------------------------------------------
 ''')
 
+        elif command == ".إيقاف الصيد":
+            print(f"{Z}[{Z}?{Z}]{Z} تم إيقاف الصيد.")
+            break  # إيقاف الحلقة بعد تلقي أمر الإيقاف
+
         else:
-            print(f"{Z}[{Z}?{Z}]{Z} صيغة الإدخال غير صحيحة، يجب أن تكون .صيد تيكنوك فقط")
+            print(f"{Z}[{Z}?{Z}]{Z} صيغة الإدخال غير صحيحة، يجب أن تكون .رباعي تيكتوك أو .إيقاف الصيد فقط")
 
     except (KeyError, IndexError):
         Good += 1
@@ -110,4 +114,5 @@ DONE USER TIK IS BEST⚡
 py(@BBBBYB1)(@ss_yj7)'''
 
         requests.post(f"https://api.telegram.org/bot{token}/sendvideo?chat_id={iD}&video=https://t.me/m_6_yy/93&caption={SE}")
+
 

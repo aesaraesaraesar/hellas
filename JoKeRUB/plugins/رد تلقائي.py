@@ -16,7 +16,7 @@ async def handler(event):
     # تجاهل الرسائل من البوتات أو إذا لم تكن المحادثة خاصة
     if sender.bot or not event.is_private:
         return  
-    
+
     # تجاهل الرسائل التي أرسلها الشخص نفسه (مالك الجلسة)
     if sender.id == (await client.get_me()).id:
         return  # تجاهل رسائلك الخاصة
@@ -42,6 +42,7 @@ async def handler(event):
     # الحصول على حالة المستخدم (Online / Offline)
     user_status = (await client(GetFullUserRequest("me"))).full_user
 
+    # التحقق إذا كنت متصل (لن يرد إذا كنت أونلاين)
     if hasattr(user_status, "status") and user_status.status is not None:
         if user_status.status.__class__.__name__ == "UserStatusOnline":
             return  # إذا كنت أونلاين، لا يرسل أي رد
@@ -56,4 +57,3 @@ async def main():
 
 with client:
     client.loop.run_until_complete(main())
-

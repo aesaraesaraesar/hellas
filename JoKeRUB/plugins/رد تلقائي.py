@@ -5,7 +5,7 @@ from telethon.tl.functions.users import GetFullUserRequest
 client = l313l  # نفترض أن l313l هو كائن جاهز لجلسة Telethon
 
 # متغيرات التحكم
-auto_reply_enabled = True  
+auto_reply_enabled = False  # الرد التلقائي مبدئيًا غير مفعل
 custom_reply_message = "أنا غير متصل حاليًا، سأرد عليك لاحقًا!"  # الكليشة الافتراضية
 
 @client.on(events.NewMessage)

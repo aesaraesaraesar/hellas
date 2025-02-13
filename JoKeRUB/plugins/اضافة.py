@@ -10,12 +10,6 @@ from telethon.tl.functions.channels import GetFullChannelRequest, GetParticipant
 
 async def get_chatinfo(event):
     chat = event.pattern_match.group(1)
-    chat_info = None
-    if chat:
-        try:
-            chat = int(chat)
-        except ValueError:
-            pass
     if not chat:
         if event.reply_to_msg_id:
             replied_msg = await event.get_reply_message()
@@ -23,86 +17,107 @@ async def get_chatinfo(event):
                 chat = replied_msg.fwd_from.channel_id
         else:
             chat = event.chat_id
+    
     try:
-        chat_info = await event.client(GetFullChatRequest(chat))
-    except:
-        try:
-            chat_info = await event.client(GetFullChannelRequest(chat))
-        except ChannelInvalidError:
-            await event.reply("**▾∮ لم يتم العثور على المجموعة او القناة**")
-            return None
-        except ChannelPrivateError:
-            await event.reply("**▾∮ لا يمكنني استخدام الامر من الكروبات او القنوات الخاصة**")
-            return None
-        except ChannelPublicGroupNaError:
-            await event.reply("**▾∮ لم يتم العثور على المجموعة او القناة**")
-            return None
-        except (TypeError, ValueError) as err:
-            await event.reply("**▾∮ رابط الكروب غير صحيح**")
-            return None
-    return chat_info
+        return await event.client(functions.channels.GetFullChannelRequest(chat))
+    except Exception:
+        await event.reply("⚠️ لا يمكن العثور على المجموعة أو القناة.")
+        return None
 
-
-def make_mention(user):
-    if user.username:
-        return f"@{user.username}"
-    else:
-        return inline_mention(user)
-
-
-def inline_mention(user):
-    full_name = user_full_name(user) or "No Name"
-    return f"[{full_name}](tg://user?id={user.id})"
-
-
-def user_full_name(user):
-    names = [user.first_name, user.last_name]
-    names = [i for i in list(names) if i]
-    full_name = ' '.join(names)
-    return full_name
- 
-
-
-# كتابة فريق الجوكر المتغيرات تثبت ودي
-# تخمط اذكر حقوق غيرها انت فرخ و دي 😂
-
-
+# 🟢 وظيفة إضافة أعضاء من مجموعة أخرى
 @l313l.on(admin_cmd(pattern=r"ضيف ?(.*)"))
-async def get_users(event):   
-    sender = await event.get_sender() ; me = await event.client.get_me()
-    if not sender.id == me.id:
-        roz = await event.reply("**▾∮ تتـم العـملية انتظـࢪ قليلا 🧸♥ ...**")
+async def add_users(event):   
+    sender = await event.get_sender()
+    me = await event.client.get_me()
+
+    if sender.id != me.id:
+        msg = await event.reply("🔄 جاري تنفيذ العملية... الرجاء الانتظار.")
     else:
-        roz = await event.edit("**▾∮ تتـم العـملية انتظـࢪ قليلا 🧸♥ ...**.")
-    JoKeRUB = await get_chatinfo(event) ; chat = await event.get_chat()
+        msg = await event.edit("🔄 جاري تنفيذ العملية... الرجاء الانتظار.")
+
+    target_chat_info = await get_chatinfo(event)
+    if not target_chat_info:
+        return
+    
+    target_chat_id = target_chat_info.full_chat.id
+    current_chat = await event.get_chat()
+
     if event.is_private:
-              return await roz.edit("**▾∮ لا يمكننـي اضافـة المـستخدمين هـنا**")    
-    s = 0 ; f = 0 ; error = 'None'   
-  
-    await roz.edit("**▾∮ حـالة الأضافة:**\n\n**▾∮ تتـم جـمع معـلومات الـمستخدمين 🔄 ...⏣**")
-    async for user in event.client.iter_participants(JoKeRUB.full_chat.id):
-                try:
-                    if error.startswith("Too"):
-                        return await roz.edit(f"**حـالة الأضـافة انتـهت مـع الأخـطاء**\n- (**ربـما هـنالك ضغـط عـلى الأمࢪ حاول مججـدا لاحقـا 🧸**) \n**الـخطأ** : \n`{error}`\n\n• اضالـة `{s}` \n• خـطأ بأضافـة `{f}`"),
-                    await event.client(functions.channels.InviteToChannelRequest(channel=chat,users=[user.id]))
-                    s = s + 1                                                    
-                    await roz.edit(f"**▾∮تتـم الأضـافة 🧸♥**\n\n• اضـيف `{s}` \n•  خـطأ بأضافـة `{f}` \n\n**× اخـر خـطأ:** `{error}`") 
-                except Exception as e:
-                    error = str(e) ; f = f + 1             
-    return await roz.edit(f"**▾∮اڪتـملت الأضافـة ✅** \n\n• تـم بنجـاح اضافـة `{s}` \n• خـطأ بأضافـة `{f}`")
-#تم كتابة الكود من قبل مطورين الجوكر ممنوع السرقة اخي الكريم
+        return await msg.edit("⚠️ لا يمكن إضافة المستخدمين هنا.")
+    
+    success = 0
+    failed = 0
+    last_error = "لا يوجد أخطاء"
+
+    await msg.edit("📥 جاري جمع معلومات المستخدمين...")
+
+    async for user in event.client.iter_participants(target_chat_id):
+        try:
+            await event.client(functions.channels.InviteToChannelRequest(channel=current_chat, users=[user.id]))
+            success += 1
+            await asyncio.sleep(2)  # تأخير لمنع الحظر
+        except (UserPrivacyRestrictedError, UserNotMutualContactError):
+            failed += 1
+            last_error = "🔒 خصوصية المستخدم تمنع إضافته"
+        except UserChannelsTooMuchError:
+            failed += 1
+            last_error = "📛 المستخدم في عدد كبير جدًا من القنوات"
+        except UserKickedError:
+            failed += 1
+            last_error = "🚫 المستخدم محظور في المجموعة"
+        except ChatAdminRequiredError:
+            return await msg.edit("⚠️ يجب أن أكون مشرفًا لإضافة أعضاء.")
+        except PeerFloodError:
+            return await msg.edit("⚠️ تم حظري مؤقتًا بسبب كثرة الدعوات! حاول لاحقًا.")
+        except FloodWaitError as e:
+            return await msg.edit(f"⏳ تيليجرام فرض انتظار {e.seconds} ثانية! حاول لاحقًا.")
+        except Exception as e:
+            failed += 1
+            last_error = str(e)
+        
+        await msg.edit(f"✅ تمت إضافة: {success}\n❌ فشل الإضافة: {failed}\n🛠 آخر خطأ: {last_error}")
+
+    await msg.edit(f"🎉 تمت العملية بنجاح!\n✅ أضيف: {success}\n❌ لم يتم إضافة: {failed}")
+
+# 🟢 وظيفة إضافة جميع جهات الاتصال للمجموعة
 @l313l.on(admin_cmd(pattern=r"اضافة_جهاتي ?(.*)"))
-async def Hussein(event):
-    channel_id = event.chat_id  
+async def add_contacts(event):
+    current_chat = event.chat_id
+
+    if event.is_private:
+        return await event.reply("⚠️ لا يمكنني إضافة جهات الاتصال هنا.")
+
     contacts = await event.client(functions.contacts.GetContactsRequest(hash=0))
-    added_count = 0 
+    success = 0
+    failed = 0
+    last_error = "لا يوجد أخطاء"
+
+    msg = await event.reply("📤 جاري إضافة جهات الاتصال...")
+
     for user in contacts.users:
         try:
-            await event.client(functions.channels.InviteToChannelRequest(
-                channel=channel_id,
-                users=[user.id],
-            ))
-            added_count += 1
+            await event.client(functions.channels.InviteToChannelRequest(channel=current_chat, users=[user.id]))
+            success += 1
+            await asyncio.sleep(2)  # تأخير لمنع الحظر
+        except (UserPrivacyRestrictedError, UserNotMutualContactError):
+            failed += 1
+            last_error = "🔒 خصوصية المستخدم تمنع إضافته"
+        except UserChannelsTooMuchError:
+            failed += 1
+            last_error = "📛 المستخدم في عدد كبير جدًا من القنوات"
+        except UserKickedError:
+            failed += 1
+            last_error = "🚫 المستخدم محظور في المجموعة"
+        except ChatAdminRequiredError:
+            return await msg.edit("⚠️ يجب أن أكون مشرفًا لإضافة الأعضاء.")
+        except PeerFloodError:
+            return await msg.edit("⚠️ تم حظري مؤقتًا بسبب كثرة الدعوات! حاول لاحقًا.")
+        except FloodWaitError as e:
+            return await msg.edit(f"⏳ تيليجرام فرض انتظار {e.seconds} ثانية! حاول لاحقًا.")
         except Exception as e:
-            await event.reply(f"**᯽︙ تم إضافة {added_count} من جهات اتصالي**")
-    await event.reply(f"**᯽︙ تم إضافة {added_count} من جهات اتصالي**")
+            failed += 1
+            last_error = str(e)
+
+        await msg.edit(f"✅ تمت إضافة: {success}\n❌ فشل الإضافة: {failed}\n🛠 آخر خطأ: {last_error}")
+
+    await msg.edit(f"🎉 تمت العملية بنجاح!\n✅ أضيف: {success}\n❌ لم يتم إضافة: {failed}")

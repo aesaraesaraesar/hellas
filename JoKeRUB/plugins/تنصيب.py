@@ -3,7 +3,7 @@ from ..Config import Config
 from ..sql_helper.globals import gvarstatus
 from l313l.razan.resources.mybot import *
 
-ROZ_PIC = "https://telegra.ph/file/d94c222c321f6d3352842.jpg"
+ROZ_PIC = ""
 
 if Config.TG_BOT_USERNAME is not None and tgbot is not None:
     @tgbot.on(events.InlineQuery)
@@ -13,7 +13,7 @@ if Config.TG_BOT_USERNAME is not None and tgbot is not None:
         query = event.text
         await bot.get_me()
         if query.startswith("السورس") and event.query.user_id == bot.uid:
-            buttons = [[Button.url("1- شرح التنصيب", "https://youtu.be/ATAgbLGzr7w"), Button.url("2- استخراج ايبيات", "https://my.telegram.org/"),],[Button.url("3- ستخراج تيرمكس", "https://replit.com/@lMl10l/CodeMusic?lite=1&outputonly=1"), Button.url("4- بوت فاذر", "http://t.me/BotFather"),],[Button.url("5- رابط التنصيب", "https://heroku.com/deploy?template=https://github.com/HuReiq/lMl10l"),],[Button.url("المطـور 👨🏼‍💻", "https://t.me/lMl10l"),]]
+            buttons = [[Button.url("1-قناة السورس ", "https://t.me/HELLASUserBot"), Button.url("2- استخراج ايبيات", "https://my.telegram.org/"),],[Button.url("3- ستخراج تيرمكس", "https://t.me/bothellasbot"), Button.url("4- بوت فاذر", "http://t.me/BotFather"),],[Button.url("5- اسعار الاشتراك", "https://t.me/HELLASUserBot/66"),],[Button.url("المطـور 👨🏼‍💻", "https://t.me/f_Q_1"),]]
             if ROZ_PIC and ROZ_PIC.endswith((".jpg", ".png", "gif", "mp4")):
                 result = builder.photo(ROZ_PIC, text=ROZ, buttons=buttons, link_preview=False)
             elif ROZ_PIC:

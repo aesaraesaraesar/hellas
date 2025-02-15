@@ -4,14 +4,6 @@ from ..sql_helper.globals import gvarstatus
 from l313l.razan.resources.mybot import *
 
 ROZ_PIC = ""
-
-if Config.TG_BOT_USERNAME is not None and tgbot is not None:
-    @tgbot.on(events.InlineQuery)
-    async def inline_handler(event):
-        builder = event.builder
-        result = None
-        query = event.text
-        await bot.get_me()
         if query.startswith("السورس") and event.query.user_id == bot.uid:
             buttons = [[Button.url("1-قناة السورس ", "https://t.me/HELLASUserBot"), Button.url("2- استخراج ايبيات", "https://my.telegram.org/"),],[Button.url("3- ستخراج تيرمكس", "https://t.me/bothellasbot"), Button.url("4- بوت فاذر", "http://t.me/BotFather"),],[Button.url("5- اسعار الاشتراك", "https://t.me/HELLASUserBot/66"),],[Button.url("المطـور 👨🏼‍💻", "https://t.me/f_Q_1"),]]
             if ROZ_PIC and ROZ_PIC.endswith((".jpg", ".png", "gif", "mp4")):

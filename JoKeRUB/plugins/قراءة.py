@@ -58,7 +58,7 @@ async def _(event):
             )
             return
         except Exception as e:
-            await processing_msg.edit(f"** تم استخراج النص بنجاح @Saveapostbot : {str(e)}**")
+            await processing_msg.edit(f"** تم استخراج النص بنجاح @Saveapostbot :**")
             return
 
 CMD_HELP.update(

@@ -28,8 +28,8 @@ async def _(event):
         await edit_or_reply(event, "**❌ يرجى الرد على صورة لاستخراج النص منها.**")
         return
 
-    chat = "@ZIKOD12bot"
-    processing_message = await edit_or_reply(event, "** تم التحميل بنجاح @ZIKOD12bot **")
+    chat = "@Saveapostbot"
+    processing_message = await edit_or_reply(event, "** تم التحميل بنجاح @Saveapostbot **")
 
     async with event.client.conversation(chat) as conv:
         try:

@@ -1,7 +1,8 @@
 import asyncio
+import os
+
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
-from telethon.tl.types import MessageMediaPhoto
 
 from JoKeRUB import l313l
 
@@ -11,37 +12,46 @@ from . import BOTLOG, BOTLOG_CHATID
 
 plugin_category = "البحث"
 
+
 @l313l.ar_cmd(
     pattern="قرائه(?:\s|$)([\s\S]*)",
     command=("قرائه", plugin_category),
     info={
-        "header": "إرسال صورة أو معالجة رابط",
-        "الاستـخـدام": "{tr}قرائه لإرسال الصورة أو معالجة الرابط",
+        "header":"لقرائه النص من الصوره ",
+        "الاستـخـدام": "{tr}لقرائه الصور ",
     },
 )
 async def _(event):
     if event.fwd_from:
         return
-
-    # تحقق من وجود صورة أو رابط في الرسالة
-    if not event.media and not event.text:
-        await edit_or_reply(event, "**```يرجى إرسال صورة أو رابط لاستخدام الأمر```**")
+    reply_message = await event.get_reply_message()
+    if not reply_message:
+        await edit_or_reply(event, "**```بالـرد على الصوره حمبـي 🧸🎈```**")
         return
-
-    # إذا كانت الرسالة تحتوي على صورة
-    if event.media and isinstance(event.media, MessageMediaPhoto):
-        zzzzl1l = await edit_or_reply(event, "**╮ ❐ ▬▭... 𓅫╰**")
+    if not reply_message.text:
+        await edit_or_reply(event, "**```بالـرد على الصوره حمبـي 🧸🎈```**")
+        return
+    chat = "@Saveapostbot"
+    zzzzl1l = await edit_or_reply(event, "**╮ ❐ جـارِ القرائه ▬▭... 𓅫╰**")
+    async with event.client.conversation(chat) as conv:
         try:
-            await event.client.send_message(event.chat_id, "إليك الصورة التي أرسلتها 🖼️:", file=event.media)
-            await zzzzl1l.delete()
+            response = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=6748718626)
+            )
+            await event.client.forward_messages(chat, reply_message)
+            response = await response
+            await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
             await zzzzl1l.edit(
-                "**❈╎تحـقق من انـك لم تقـم بحظـر البوت  .. ثم اعـد استخدام الامـر ...🤖♥️**"
+                "**❈╎تحـقق من انـك لم تقـم بحظـر البوت .. ثم اعـد استخدام الامـر ...🤖♥️**"
             )
             return
-    else:
-        # في حالة وجود رابط أو نص
-        await edit_or_reply(event, "**```تم معالجة الرابط أو النص بنجاح!```**")
+        if response.text.startswith(""):
+            await zzzzl1l.edit("**🤨💔...؟**")
+        else:
+            await zzzzl1l.delete()
+            await event.client.send_message(event.chat_id, response.message)
+
 
 CMD_HELP.update(
     {

@@ -35,7 +35,7 @@ async def _(event):
         return
 
     chat = "@Saveapostbot"
-    processing_msg = await edit_or_reply(event, "**╮ ❐ جاري قراءة النص من الصورة ▬▭... 𓅫╰**")
+    processing_msg = await edit_or_reply(event, "**╮  تم قرائه النص بنجاح @Saveapostbot ╰**")
 
     async with event.client.conversation(chat) as conv:
         try:

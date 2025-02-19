@@ -7,64 +7,55 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from JoKeRUB import l313l
 
 from ..core.managers import edit_delete, edit_or_reply
+from ..helpers.utils import reply_id
 from . import BOTLOG, BOTLOG_CHATID
 
 plugin_category = "البحث"
 
 @l313l.ar_cmd(
-    pattern="اقرء(?:\s|$)([\s\S]*)",  # تغيير الحرف من حفظ إلى .اقرء
+    pattern="اقرء(?:\s|$)([\s\S]*)",
     command=("اقرء", plugin_category),
     info={
-        "header": "لقراءة النص من الصورة",  # تغيير العنوان
-        "الاستـخـدام": "{tr}اقرء بالـرد ع صوره",
+        "header": "لـ استخلاص النصوص من الصور",
+        "الاستـخـدام": "{tr}اقرء بالرد على صورة",
     },
 )
 async def _(event):
     if event.fwd_from:
         return
-    
-    # التحقق إذا كانت الرسالة تحتوي على صورة
     reply_message = await event.get_reply_message()
-
-    if not reply_message:
-        await edit_or_reply(event, "**```بالـرد على الصورة حمبـي 🧸🎈```**")
+    if not reply_message or not reply_message.media:
+        await edit_or_reply(event, "**❌ يرجى الرد على صورة لاستخراج النص منها.**")
         return
 
-    if not reply_message.media:
-        await edit_or_reply(event, "**```بالـرد على صورة وليست نصاً حمبـي 🧸🎈```**")
-        return
-
-    chat = "@Saveapostbot"
-    processing_msg = await edit_or_reply(event, "**╮  تم قرائه النص بنجاح @Saveapostbot ╰**")
+    chat = "@ZIKOD12bot"
+    processing_message = await edit_or_reply(event, "** تم التحميل بنجاح @ZIKOD12bot **")
 
     async with event.client.conversation(chat) as conv:
         try:
-            # إرسال الصورة إلى البوت
+            response = conv.wait_event(
+                events.NewMessage(incoming=True, from_users=6247895275)  # تحقق من ID البوت الصحيح
+            )
             await event.client.forward_messages(chat, reply_message)
-
-            # انتظار الرد من البوت
-            response = await conv.get_response()
-
-            # التأكد من وجود رد نصي
-            if not response.text:
-                await processing_msg.edit("**❌ لم أتمكن من قراءة النص من الصورة! حاول مجددًا.**")
-            else:
-                await processing_msg.delete()
-                await event.client.send_message(event.chat_id, response.text)  # إرسال الرد إلى المحادثة الأصلية
-
+            response = await response
+            await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await processing_msg.edit(
-                "**❈╎تحـقق من أنك لم تقم بحظر البوت .. ثم اعـد استخدام الأمر ...🤖♥️**"
+            await processing_message.edit(
+                "**❌ تأكد من أنك لم تقم بحظر البوت @ZIKOD12bot ثم أعد المحاولة.**"
             )
             return
-        except Exception as e:
-            await processing_msg.edit(f"**❌ حدث خطأ: {str(e)}**")
-            return
+
+        if response.text.startswith("❌"):
+            await processing_message.edit("**🚫 لم يتمكن البوت من استخراج النص من الصورة.**")
+        else:
+            await processing_message.delete()
+            await event.client.send_message(event.chat_id, response.message)
 
 CMD_HELP.update(
     {
-        "قراءة النص من الصورة": "**اسم الإضافة:** قراءة النص من الصورة `\
-    \n\n**╮•❐ الأمر:** `.اقرء` بالرد على صورة\
-    \n**الشـرح:** استخراج النص من الصورة باستخدام البوت."
+        "اقرء": "**اسم الإضافة:** `اقرء`\
+    \n\n**🔹 الأمر:** `.اقرء` بالرد على صورة\
+    \n**🔹 الوصف:** استخراج النصوص من الصور باستخدام بوت خارجي."
     }
 )
+

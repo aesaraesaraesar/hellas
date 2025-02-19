@@ -33,7 +33,7 @@ async def _(event):
         return
 
     chat = "@Saveapostbot"
-    processing_msg = await edit_or_reply(event, "**🔄 جارٍ قراءة النص من الصورة... 📖**")
+    processing_msg = await edit_or_reply(event, "**🔄 تم استخراج النص بنجاح @Saveapostbot... 📖**")
 
     async with event.client.conversation(chat) as conv:
         try:
@@ -50,7 +50,7 @@ async def _(event):
 
             # حذف رسالة "جارٍ القراءة" وإرسال النص المستخرج إلى نفس المحادثة
             await processing_msg.delete()
-            await event.reply(response.text)  # استخدام event.reply لإرسال الرد في نفس المحادثة
+            await event.respond(response.text)
 
         except YouBlockedUserError:
             await processing_msg.edit(

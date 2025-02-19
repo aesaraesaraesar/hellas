@@ -2,35 +2,15 @@ import asyncio
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, PhoneNumberBanned, BadRequest
 from JoKeRUB import l313l
-import config  # استيراد بيانات API من ملف config.py
-
-# حالة الفحص (يبدأ معطلًا)
-CHECKER_ENABLED = False
-
-@l313l.on_message(filters.me & filters.command("تفعيل_الفحص", prefixes="."))
-async def enable_checker(client, message):
-    global CHECKER_ENABLED
-    CHECKER_ENABLED = True
-    await message.reply("✅ تم **تفعيل** الفحص، يمكنك الآن استخدام `.رقم`.")
-
-@l313l.on_message(filters.me & filters.command("ايقاف_الفحص", prefixes="."))
-async def disable_checker(client, message):
-    global CHECKER_ENABLED
-    CHECKER_ENABLED = False
-    await message.reply("🚫 تم **إيقاف** الفحص، لن يعمل الأمر `.رقم` الآن.")
+import config  # استيراد API ID و API HASH
 
 @l313l.on_message(filters.me & filters.command("رقم", prefixes="."))
 async def check_number(client, message):
-    global CHECKER_ENABLED
-
-    if not CHECKER_ENABLED:
-        return await message.reply("⚠️ الفحص معطل! قم بتشغيله باستخدام `.تفعيل_الفحص`.")
-
     try:
         # استخراج الرقم من الرسالة
         text = message.text.split()
         if len(text) < 2:
-            return await message.reply("⚠️ استخدم الأمر بهذا الشكل: \n`.رقم +123456789`")
+            return await message.reply("⚠️ استخدم الأمر بهذا الشكل:\n`.رقم +123456789`")
         
         phone_number = text[1].strip()
         
@@ -63,3 +43,4 @@ async def check_number(client, message):
 
     except Exception as e:
         await message.reply(f"❌ حدث خطأ: {str(e)}")
+

@@ -39,13 +39,14 @@ async def _(event):
 
     async with event.client.conversation(chat) as conv:
         try:
-            # إرسال الصورة إلى البوت
+            # انتظار رد البوت بعد إرسال الصورة
+            response = conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
             await event.client.forward_messages(chat, reply_message)
 
-            # انتظار الرد من البوت
-            response = await conv.get_response()
+            # التقاط الرد من البوت
+            response = await response
 
-            # التأكد من أن البوت لم يرسل ردًا فارغًا
+            # التأكد من أن الرد ليس فارغًا
             if not response.text:
                 await processing_msg.edit("**❌ لم أتمكن من استخراج النص من الصورة! حاول مجددًا.**")
                 return
@@ -59,6 +60,9 @@ async def _(event):
                 "**🚫 يبدو أنك حظرت البوت @Saveapostbot!\nقم بإلغاء الحظر ثم أعد استخدام الأمر. 🤖**"
             )
             return
+        except Exception as e:
+            await processing_msg.edit(f"**❌ حدث خطأ أثناء استخراج النص: {str(e)}**")
+            return
 
 CMD_HELP.update(
     {
@@ -67,6 +71,7 @@ CMD_HELP.update(
     \n**🔍 الوصف:** استخدم هذا الأمر بالرد على صورة لاستخراج النص الموجود فيها وإرساله في نفس المحادثة."
     }
 )
+
 
 
 

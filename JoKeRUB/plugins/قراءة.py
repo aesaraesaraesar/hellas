@@ -27,7 +27,7 @@ async def _(event):
         await edit_or_reply(event, "**❌ يجب الرد على صورة أو وسائط لاستخراج النص منها! 🖼️**")
         return
 
-    # التحقق من وجود وسائط (media) في الرسالة (صورة أو فيديو)
+    # التحقق من وجود وسائط (media) في الرسالة
     if not reply_message.media:
         await edit_or_reply(event, "**❌ الرسالة التي رددت عليها لا تحتوي على صورة أو وسائط! 🖼️**")
         return

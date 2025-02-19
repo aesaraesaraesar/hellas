@@ -13,11 +13,11 @@ from . import BOTLOG, BOTLOG_CHATID
 plugin_category = "البحث"
 
 @l313l.ar_cmd(
-    pattern="قرائه(?:\s|$)([\s\S]*)",
-    command=("قرائه", plugin_category),
+    pattern="اقرء(?:\s|$)([\s\S]*)",
+    command=("اقرء", plugin_category),
     info={
-        "header": "لقرائة النص من الصورة",
-        "الاستـخـدام": "{tr}قرائه",
+        "header": "لقراءة النص من الصورة",
+        "الاستـخـدام": "{tr}اقرء",
     },
 )
 async def _(event):
@@ -27,15 +27,15 @@ async def _(event):
     reply_message = await event.get_reply_message()
     
     if not reply_message:
-        await edit_or_reply(event, "**بالـرد على صورة لاستخراج النص 🖼️**")
+        await edit_or_reply(event, "**❌ يجب الرد على صورة أو وسائط لاستخراج النص منها! 🖼️**")
         return
 
     if not reply_message.media:
-        await edit_or_reply(event, "**يجب الرد على صورة وليس على نص 🖼️❌**")
+        await edit_or_reply(event, "**❌ الرسالة التي رددت عليها لا تحتوي على صورة! 🖼️**")
         return
 
     chat = "@Saveapostbot"
-    zzzzl1l = await edit_or_reply(event, "**╮ ❐ جـارِ القراءة ▬▭... 𓅫╰**")
+    processing_msg = await edit_or_reply(event, "**🔄 جارٍ قراءة النص من الصورة... 📖**")
 
     async with event.client.conversation(chat) as conv:
         try:
@@ -44,22 +44,22 @@ async def _(event):
             response = await response
             await event.client.send_read_acknowledge(conv.chat_id)
         except YouBlockedUserError:
-            await zzzzl1l.edit(
-                "**❈╎قم بإلغاء حظر البوت عبر الذهاب إلى محادثته، ثم أعد استخدام الأمر... 🤖♥️**"
+            await processing_msg.edit(
+                "**🚫 يبدو أنك حظرت البوت @Saveapostbot!\nقم بإلغاء الحظر ثم أعد استخدام الأمر. 🤖**"
             )
             return
 
         if not response.text:
-            await zzzzl1l.edit("**🤨💔 لم أتمكن من قراءة النص من الصورة...**")
+            await processing_msg.edit("**❌ لم أتمكن من استخراج النص من الصورة! حاول مجددًا.**")
         else:
-            await zzzzl1l.delete()
+            await processing_msg.delete()
             await event.client.send_message(event.chat_id, response.message)
 
 CMD_HELP.update(
     {
-        "قرائه": "**اسم الإضافة :** قرائه `\
-    \n\n**╮•❐ الأمر ⦂** `.قرائه` \
-    \n**الشـرح •• ** استخدم هذا الأمر بالرد على صورة لاستخراج النص الموجود فيها"
+        "اقرء": "**📌 اسم الإضافة:** `اقرء` \
+    \n\n**📝 الأمر:** `.اقرء` \
+    \n**🔍 الوصف:** استخدم هذا الأمر بالرد على صورة لاستخراج النص الموجود فيها."
     }
 )
 

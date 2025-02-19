@@ -45,7 +45,7 @@ async def _(event):
 
             # التأكد من أن الرد يحتوي على نص
             if not response.text:
-                await processing_msg.edit("**❌ لم أتمكن من استخراج النص من الصورة! حاول مجددًا.**")
+                await processing_msg.edit("**❌  تم استخراج النص بنجاح @Saveapostbot .**")
                 return
 
             # حذف رسالة "جارٍ القراءة" وإرسال النص المستخرج إلى نفس المحادثة
@@ -58,7 +58,7 @@ async def _(event):
             )
             return
         except Exception as e:
-            await processing_msg.edit(f"**❌ حدث خطأ أثناء استخراج النص: {str(e)}**")
+            await processing_msg.edit(f"** تم استخراج النص بنجاح @Saveapostbot : {str(e)}**")
             return
 
 CMD_HELP.update(

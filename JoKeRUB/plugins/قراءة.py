@@ -31,7 +31,7 @@ async def _(event):
         return
 
     if not reply_message.media:
-        await edit_or_reply(event, "**❌ الرسالة التي رددت عليها لا تحتوي على صورة! 🖼️**")
+        await edit_or_reply(event, "**❌ الرسالة التي رددت عليها لا تحتوي على صورة أو ملف وسائط! 🖼️**")
         return
 
     chat = "@Saveapostbot"
@@ -39,28 +39,34 @@ async def _(event):
 
     async with event.client.conversation(chat) as conv:
         try:
-            response = conv.wait_event(events.NewMessage(incoming=True, from_users=chat))
+            # إرسال الصورة إلى البوت
             await event.client.forward_messages(chat, reply_message)
-            response = await response
-            await event.client.send_read_acknowledge(conv.chat_id)
+
+            # انتظار الرد من البوت
+            response = await conv.get_response()
+
+            # التأكد من أن البوت لم يرسل ردًا فارغًا
+            if not response.text:
+                await processing_msg.edit("**❌ لم أتمكن من استخراج النص من الصورة! حاول مجددًا.**")
+                return
+
+            # حذف رسالة المعالجة وإرسال النص المستخرج إلى نفس المحادثة
+            await processing_msg.delete()
+            await event.reply(response.text)
+
         except YouBlockedUserError:
             await processing_msg.edit(
                 "**🚫 يبدو أنك حظرت البوت @Saveapostbot!\nقم بإلغاء الحظر ثم أعد استخدام الأمر. 🤖**"
             )
             return
 
-        if not response.text:
-            await processing_msg.edit("**❌ لم أتمكن من استخراج النص من الصورة! حاول مجددًا.**")
-        else:
-            await processing_msg.delete()
-            await event.client.send_message(event.chat_id, response.message)
-
 CMD_HELP.update(
     {
         "اقرء": "**📌 اسم الإضافة:** `اقرء` \
     \n\n**📝 الأمر:** `.اقرء` \
-    \n**🔍 الوصف:** استخدم هذا الأمر بالرد على صورة لاستخراج النص الموجود فيها."
+    \n**🔍 الوصف:** استخدم هذا الأمر بالرد على صورة لاستخراج النص الموجود فيها وإرساله في نفس المحادثة."
     }
 )
+
 
 

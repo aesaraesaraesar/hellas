@@ -3,6 +3,7 @@ from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
 from JoKeRUB import l313l
+
 from ..core.managers import edit_delete, edit_or_reply
 from . import BOTLOG, BOTLOG_CHATID
 
@@ -22,54 +23,47 @@ async def _(event):
 
     reply_message = await event.get_reply_message()
 
-    # التحقق من وجود رسالة رد
+    # التحقق من وجود رسالة رد تحتوي على وسائط (صورة أو فيديو أو مستند)
     if not reply_message:
-        await edit_or_reply(event, "**❌ يجب الرد على صورة أو وسائط لاستخراج النص منها! 🖼️**")
+        await edit_or_reply(event, "**يجب الرد على صورة أو وسائط لاستخراج النص منها! 🖼️❌**")
         return
 
-    # التحقق من وجود وسائط (media) في الرسالة
     if not reply_message.media:
-        await edit_or_reply(event, "**❌ الرسالة التي رددت عليها لا تحتوي على صورة أو وسائط! 🖼️**")
+        # إذا كانت الرسالة تحتوي على نص فقط
+        await edit_or_reply(event, "**يجب الرد على صورة أو وسائط وليس نصًا! 🖼️❌**")
         return
 
     chat = "@Saveapostbot"
-    processing_msg = await edit_or_reply(event, "**🔄 تم استخراج النص بنجاح @Saveapostbot... 📖**")
+    processing_msg = await edit_or_reply(event, "**╮ ❐ تم قرائه النص بنجاح @Saveapostbot ▬▭... 𓅫╰**")
 
     async with event.client.conversation(chat) as conv:
         try:
             # إرسال الصورة إلى البوت
             await event.client.forward_messages(chat, reply_message)
 
-            # انتظار الرد من البوت
+            # الانتظار للحصول على الرد من البوت
             response = await conv.get_response()
 
-            # التأكد من أن الرد يحتوي على نص
+            # التأكد من وجود نص في الرد
             if not response.text:
-                await processing_msg.edit("**❌  تم استخراج النص بنجاح @Saveapostbot .**")
-                return
-
-            # حذف رسالة "جارٍ القراءة" وإرسال النص المستخرج إلى نفس المحادثة
-            await processing_msg.delete()
-            await event.respond(response.text)
+                await processing_msg.edit("**❌ لم أتمكن من قراءة النص من الصورة! حاول مجددًا.**")
+            else:
+                await processing_msg.delete()
+                await event.reply(response.text)  # إرسال الرد إلى نفس المحادثة
 
         except YouBlockedUserError:
             await processing_msg.edit(
-                "**🚫 يبدو أنك حظرت البوت @Saveapostbot!\nقم بإلغاء الحظر ثم أعد استخدام الأمر. 🤖**"
+                "**❈╎يبدو أنك حظرت البوت! 🚫\nقم بإلغاء الحظر عبر الذهاب إلى محادثته ثم أعد استخدام الأمر... 🤖♥️**"
             )
             return
         except Exception as e:
-            await processing_msg.edit(f"** تم استخراج النص بنجاح @Saveapostbot :**")
+            await processing_msg.edit(f"**❌ حدث خطأ: {str(e)}**")
             return
 
 CMD_HELP.update(
     {
-        "اقرء": "**📌 اسم الإضافة:** `اقرء` \
-    \n\n**📝 الأمر:** `.اقرء` \
-    \n**🔍 الوصف:** استخدم هذا الأمر بالرد على صورة لاستخراج النص الموجود فيها وإرساله في نفس المحادثة."
+        "اقرء": "**اسم الإضافة:** اقرء `\
+    \n\n**╮•❐ الأمر:** `.اقرء` \
+    \n**الشـرح:** استخدم هذا الأمر بالرد على صورة أو وسائط لاستخراج النص الموجود فيها."
     }
 )
-
-
-
-
-

@@ -5,7 +5,7 @@ import re
 import os
 import datetime
 
-@l313l.on(events.NewMessage(pattern='\.معلومات تيك (.+)'))
+@l313l.on(events.NewMessage(pattern='\.حساب تيك (.+)'))
 async def tiktok_scraper(event):
     user = event.pattern_match.group(1)
     url = f'https://www.tiktok.com/@{user}'
@@ -48,7 +48,6 @@ async def tiktok_scraper(event):
         👥 **المتابعين:** {follower_count}
         🔄 **المتابعهم:** {following_count}
         🎬 **عدد الفيديوهات:** {video_count}
-        📅 **تاريخ الإنشاء:** {create_time}
         📝 **البايو:** {bio}
         """
         

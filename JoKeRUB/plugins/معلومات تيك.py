@@ -5,7 +5,7 @@ import re
 import os
 import datetime
 
-@l313l.on(events.NewMessage(pattern='\.معلومات تيك (.+)'))
+@l313l.on(events.NewMessage(pattern='\.حساب تيك(.+)'))
 async def tiktok_scraper(event):
     user = event.pattern_match.group(1)
     url = f'https://www.tiktok.com/@{user}'

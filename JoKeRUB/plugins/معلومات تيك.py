@@ -42,13 +42,14 @@ async def tiktok_scraper(event):
         await event.reply(file=avatar_filename)
         
         response = f"""
-        🔹 **معلومات الحساب:**
-        🏷 **اسم الحساب:** {nickname}
-        🆔 **User ID:** {user_id}
-        👥 **المتابعين:** {follower_count}
-        🔄 **المتابعهم:** {following_count}
-        🎬 **عدد الفيديوهات:** {video_count}
-        📝 **البايو:** {bio}
+         🔹**معلومات حساب التيك توك** :
+  🏷 **اسم الحساب**  :   {nickname}
+ 🏷 **ايدي الحساب**  :  {user_id}
+👥 **عدد المتابعين**  :   {follower_count}
+🔄 **عدد المتابعهم ** : {following_count}
+🎬 **عدد الفديوهات **:  {video_count}
+📝 **البايو**  : {bio}
+تم سحب المعلومات بواسطه 𝐒𝐨𝐮𝐫𝐜𝐞 𝐇𝐞𝐥𝐥𝐚s
         """
         
         await event.reply(response)

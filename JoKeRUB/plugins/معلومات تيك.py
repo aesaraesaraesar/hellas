@@ -5,7 +5,7 @@ import re
 import os
 import datetime
 
-@l313l.on(events.NewMessage(pattern='\.حساب تيك(.+)'))
+@l313l.on(events.NewMessage(pattern='\.معلومات تيك (.+)'))
 async def tiktok_scraper(event):
     user = event.pattern_match.group(1)
     url = f'https://www.tiktok.com/@{user}'
@@ -57,5 +57,6 @@ async def tiktok_scraper(event):
         await event.reply(f"❌ حدث خطأ أثناء جلب البيانات: {str(e)}")
 
 l313l.run_until_disconnected()
+
 
 

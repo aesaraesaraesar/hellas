@@ -123,7 +123,7 @@ async def Hussein(event):
 @l313l.on(events.NewMessage(incoming=True))
 async def Hussein(event):
     if event.message.message.startswith("تجميع ارشقلي") and str(event.sender_id) in ConsoleJoker:
-        await event.reply("**᯽︙سيتم تجميع النقاط من بوت العقاب , قبل كل شي تأكد من انك قمت بلانظمام الى القنوات الاشتراك الاجباري للبوت لعدم حدوث اخطاء**")
+        await event.reply("**᯽︙سيتم تجميع النقاط من بوت ارشقلي , قبل كل شي تأكد من انك قمت بلانظمام الى القنوات الاشتراك الاجباري للبوت لعدم حدوث اخطاء**")
         channel_entity = await l313l.get_entity(bot_username3)
         await l313l.send_message('@Ershkalibot', '/start')
         await asyncio.sleep(3)
@@ -292,7 +292,7 @@ async def _(event):
 @l313l.on(admin_cmd(pattern="(تجميع ارشقلي|تجميع ارشقلي)"))
 async def _(event):
     if JoKeRUB[0] == "yes":
-        await event.edit("**᯽︙سيتم تجميع النقاط من بوت العقاب , قبل كل شي تأكد من انك قمت بلانظمام الى القنوات الاشتراك الاجباري للبوت لعدم حدوث اخطاء**")
+        await event.edit("**᯽︙سيتم تجميع النقاط من بوت ارشقلي , قبل كل شي تأكد من انك قمت بلانظمام الى القنوات الاشتراك الاجباري للبوت لعدم حدوث اخطاء**")
         channel_entity = await l313l.get_entity(bot_username3)
         await l313l.send_message('@Ershkalibot', '/start')
         await asyncio.sleep(3)

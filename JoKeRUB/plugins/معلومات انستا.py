@@ -2,14 +2,8 @@ import requests
 import random
 from JoKeRUB import l313l
 
-@l313l.on("حساب انستا")
-async def inst(event):
-    args = event.text.split("+", 1)
-    if len(args) < 2:
-        return await event.reply("❌ يرجى إدخال اسم المستخدم بعد الأمر، مثال:\n.حساب انستا +username")
-    
-    username = args[1].strip()
-    
+def get_instagram_info(username):
+    """ جلب بيانات الحساب من انستجرام """
     headers = {
         'accept': '*/*',
         'accept-language': 'ar-IQ,ar;q=0.9,en-US;q=0.8,en;q=0.7',
@@ -29,28 +23,40 @@ async def inst(event):
         data = response.json().get('data', {}).get('user', {})
 
         if not data:
-            return await event.reply(f"❌ لم يتم العثور على معلومات للحساب: {username}")
+            return None, f"❌ لم يتم العثور على معلومات للحساب: {username}"
         
-        # استخراج المعلومات
-        full_name = data.get('full_name', 'N/A')
-        followers = data.get('edge_followed_by', {}).get('count', 0)
-        following = data.get('edge_follow', {}).get('count', 0)
-        user_id = data.get('id', 'N/A')
-        category = data.get('category_name', 'غير محدد')
-        is_verified = "✅ نعم" if data.get('is_verified', False) else "❌ لا"
-        is_private = "🔒 نعم" if data.get('is_private', False) else "🔓 لا"
-        posts = data.get('edge_owner_to_timeline_media', {}).get('count', 0)
-        biography = data.get('biography', 'N/A')
-        profile_pic = data.get('profile_pic_url_hd', '')
+        return data, None
+    
+    except requests.RequestException as e:
+        return None, f"❌ حدث خطأ أثناء جلب البيانات: {str(e)}"
 
-        # استخراج روابط إضافية (إن وجدت)
-        links_text = ""
-        for link in data.get('bio_links', []):
-            title = link.get('title', 'رابط إضافي')
-            url = link.get('url', '#')
-            links_text += f"\n🔗 {title} ➝ [اضغط هنا]({url})"
+@l313l.on("حساب انستا")
+async def inst(event):
+    print("تم استدعاء الدالة")  # ✅ التأكد أن الدالة تعمل
+    
+    args = event.text.split("+", 1)
+    if len(args) < 2:
+        return await event.reply("❌ يرجى إدخال اسم المستخدم بعد الأمر، مثال:\n.حساب انستا +username")
+    
+    username = args[1].strip()
+    data, error = get_instagram_info(username)
 
-        caption = f"""
+    if error:
+        return await event.reply(error)
+
+    # استخراج المعلومات
+    full_name = data.get('full_name', 'N/A')
+    followers = data.get('edge_followed_by', {}).get('count', 0)
+    following = data.get('edge_follow', {}).get('count', 0)
+    user_id = data.get('id', 'N/A')
+    category = data.get('category_name', 'غير محدد')
+    is_verified = "✅ نعم" if data.get('is_verified', False) else "❌ لا"
+    is_private = "🔒 نعم" if data.get('is_private', False) else "🔓 لا"
+    posts = data.get('edge_owner_to_timeline_media', {}).get('count', 0)
+    biography = data.get('biography', 'N/A')
+    profile_pic = data.get('profile_pic_url_hd', '')
+
+    caption = f"""
 📌 **معلومات حساب انستجرام**
 👤 **الاسم:** {full_name}
 🔗 **المعرف:** @{username}
@@ -62,11 +68,6 @@ async def inst(event):
 🔒 **خاص:** {is_private}
 📸 **عدد المنشورات:** {posts}
 📝 **الوصف:** {biography}
-{links_text}
 """
 
-        await event.reply_photo(profile_pic, caption=caption, parse_mode="Markdown")
-    
-    except requests.RequestException as e:
-        await event.reply(f"❌ حدث خطأ أثناء جلب البيانات: {str(e)}")
-
+    await event.reply_photo(profile_pic, caption=caption, parse_mode="Markdown")

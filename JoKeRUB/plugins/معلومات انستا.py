@@ -32,13 +32,15 @@ def get_instagram_info(username):
 
 @l313l.on("حساب انستا")
 async def inst(event):
-    print("تم استدعاء الدالة")  # ✅ التأكد أن الدالة تعمل
+    # إرسال رسالة تأكيد بأن الدالة قد تم استدعاؤها
+    await event.reply("✅ تم استدعاء الدالة بنجاح.")
     
     args = event.text.split("+", 1)
     if len(args) < 2:
         return await event.reply("❌ يرجى إدخال اسم المستخدم بعد الأمر، مثال:\n.حساب انستا +username")
     
     username = args[1].strip()
+    await event.reply(f"🔄 جاري جلب معلومات الحساب: {username}...")  # إرسال رسالة حول جلب المعلومات
     data, error = get_instagram_info(username)
 
     if error:
@@ -70,4 +72,8 @@ async def inst(event):
 📝 **الوصف:** {biography}
 """
 
+    # إرسال الصورة مع المعلومات
     await event.reply_photo(profile_pic, caption=caption, parse_mode="Markdown")
+
+    # إرسال رسالة تأكيد بعد الإرسال
+    await event.reply("✅ تم إرسال المعلومات بنجاح!")

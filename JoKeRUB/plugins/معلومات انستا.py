@@ -1,40 +1,87 @@
 from JoKeRUB import l313l
 import requests
+import base64
+import logging
+import random
 
-@l313l.on_message(filters.text & filters.private)
-async def instagram_info(client, message):
-    if message.text.startswith('.معلومات انستا'):
-        username = message.text.split(' ')[1]  # استخرج اسم المستخدم من الرسالة
-
+def get_instagram_info(username):
+    """جلب معلومات الحساب من إنستاجرام"""
+    try:
+        tomy = f"-1::{username}"
+        tom = base64.b64encode(tomy.encode()).decode()
         headers = {
-            'accept': '*/*',
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-            'x-requested-with': 'XMLHttpRequest',
+            'user-agent': asasa()
         }
+        url = f"https://instanavigation.net/api/v1/stories/{tom}"
+        response = requests.get(url, headers=headers, timeout=10)
+
+        if response.status_code != 200:
+            logging.error(f"Error fetching Instagram info: {response.text}")
+            return None
+
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Request error: {e}")
+        return None
+
+def asasa():
+    ase = [
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Safari/605.1.15',
+    ]
+    return random.choice(ase)
+
+def handle_message(event):
+    """معالجة الرسالة القادمة"""
+    chat_id = event.chat_id
+    text = event.text.strip()
+    sender_id = event.sender_id
+    
+    logging.debug(f"Received message: {text} from ID: {sender_id}")
+    
+    if text.startswith('.معلومات انستا'):
+        parts = text.split()
+        if len(parts) < 2:
+            l313l.send_message(chat_id, "⚠️ يرجى إدخال اسم المستخدم بعد الأمر.")
+            return
         
-        api_url = f"https://www.instagram.com/{username}/?__a=1"
-        response = requests.get(api_url, headers=headers)
+        username = parts[1]
+        fetch_instagram_info(chat_id, username)
 
-        if response.status_code == 200:
-            data = response.json()
-            user_data = data.get('graphql', {}).get('user', {})
-            if user_data:
-                full_name = user_data.get('full_name', 'غير معروف')
-                username = user_data.get('username', 'غير معروف')
-                followers = user_data.get('edge_followed_by', {}).get('count', 0)
-                following = user_data.get('edge_follow', {}).get('count', 0)
-                bio = user_data.get('biography', 'لا توجد معلومات')
+def fetch_instagram_info(chat_id, username):
+    instagram_info = get_instagram_info(username)
+    
+    if not instagram_info:
+        l313l.send_message(chat_id, "⚠️ حدث خطأ أثناء جلب المعلومات. حاول لاحقًا.")
+        return
+    
+    user_info = instagram_info.get('user_info', {})
+    if not user_info:
+        l313l.send_message(chat_id, f"❌ لم يتم العثور على معلومات للحساب *{username}*، تأكد من صحة المعرف.")
+        return
+    
+    full_name = user_info.get('full_name', 'غير متوفر')
+    is_private = 'نعم' if user_info.get('is_private', False) else 'لا'
+    media_count = user_info.get('posts', 'غير متوفر')
+    followers = user_info.get('followers', 'غير متوفر')
+    following = user_info.get('following', 'غير متوفر')
+    bio = user_info.get('biography', 'غير متوفر')
+    profile_pic = user_info.get('profile_pic_url', '')
+    is_verified = 'نعم' if user_info.get('is_verified', False) else 'لا'
 
-                # إعداد النص لعرضه
-                user_info = f"""
-                • اسم الحساب: {full_name}
-                • يوزر الحساب: {username}
-                • المتابعين: {followers}
-                • المتابعين لهم: {following}
-                • الوصف: {bio}
-                """
-                await message.reply(user_info)
-            else:
-                await message.reply(f"لم يتم العثور على معلومات للحساب {username}.")
-        else:
-            await message.reply("حدث خطأ أثناء جلب البيانات من Instagram.")
+    message = (f"*⚡ اسم الحساب: {full_name}\n"
+               f"📛 يوزر الحساب: @{username}\n"
+               f"👥 المتابعين: {followers}\n"
+               f"🚀 المتابعين له: {following}\n"
+               f"📌 معرف الحساب: {user_info.get('id', 'غير متوفر')}\n"
+               f"🔒 الحساب خاص: {is_private}\n"
+               f"✅ الحساب موثق: {is_verified}\n"
+               f"🖼 عدد المنشورات: {media_count}\n"
+               f"📄 السيرة الذاتية: {bio}*")
+    
+    if profile_pic:
+        l313l.send_photo(chat_id, profile_pic, caption=message, parse_mode='Markdown')
+    else:
+        l313l.send_message(chat_id, message, parse_mode='Markdown')
+
+l313l.run(handle_message)

@@ -36,15 +36,19 @@ async def inst(event):
     await event.reply("✅ تم استدعاء الدالة بنجاح.")
     
     args = event.text.split("+", 1)
+    
     if len(args) < 2:
-        return await event.reply("❌ يرجى إدخال اسم المستخدم بعد الأمر، مثال:\n.حساب انستا +username")
+        await event.reply("❌ يرجى إدخال اسم المستخدم بعد الأمر، مثال:\n.حساب انستا +username")
+        return
     
     username = args[1].strip()
     await event.reply(f"🔄 جاري جلب معلومات الحساب: {username}...")  # إرسال رسالة حول جلب المعلومات
+    
     data, error = get_instagram_info(username)
 
     if error:
-        return await event.reply(error)
+        await event.reply(error)
+        return
 
     # استخراج المعلومات
     full_name = data.get('full_name', 'N/A')

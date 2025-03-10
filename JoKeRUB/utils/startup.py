@@ -96,7 +96,7 @@ async def startupmessage():
                 BOTLOG_CHATID,
                 "https://t.me/MemeSoundJep/24",
                 caption="**‏᯽︙ بــوت robin  يـعـمـل بـنـجـاح ✓ \n᯽︙ أرسل `.الاوامر`لرؤية اوامر السورس \n  ᯽︙ لأستعمال بوت الأختراق عبر كود التيرمكس أرسل`.هاك`**",
-                buttons=[(Button.url("سورس روبن", "https://t.me/is7rb"),)],
+                buttons=[(Button.url("سورس هيلاس", "https://t.me/F_Q_1"),)],
             )
     except Exception as e:
         LOGS.error(e)

@@ -895,6 +895,6 @@ async def approve_p_m(event):
     await edit_or_reply(
         event,
         APPROVED_PMs,
-        file_name="قائمة الحماية الجوكر.txt",
-        caption="قائمة المسموح لهم الحالية\n سورس الجوكر \n @jepthon",
+        file_name="قائمة الحمايه هيلاس.txt",
+        caption="قائمة المسموح لهم الحالية\n سورس الجوكر \n @HELLASUserBot",
     )
